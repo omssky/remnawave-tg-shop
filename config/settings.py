@@ -497,9 +497,22 @@ class Settings(BaseSettings):
         return methods or default_order
     
     # Logging Configuration
+    LOG_LEVEL: str = Field(
+        default="INFO",
+        description="Global log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)",
+    )
     LOG_CHAT_ID: Optional[int] = Field(default=None, description="Telegram chat/group ID for sending notifications")
     LOG_THREAD_ID: Optional[int] = Field(default=None, description="Thread ID for supergroup messages (optional)")
     
+    @field_validator('LOG_LEVEL', mode='before')
+    @classmethod
+    def normalize_log_level(cls, v):
+        if isinstance(v, str):
+            v = v.strip().upper()
+        if not v:
+            return "INFO"
+        return v
+
     @field_validator('LOG_CHAT_ID', 'LOG_THREAD_ID', mode='before')
     @classmethod
     def validate_optional_int_fields(cls, v):

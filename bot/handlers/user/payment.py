@@ -164,8 +164,10 @@ async def process_successful_payment(session: AsyncSession, bot: Bot,
         should_send_nalogo_receipt = bool(
             nalogo_service
             and nalogo_service.configured
+            and payment_info_from_webhook.get("paid") is True
+            and payment_info_from_webhook.get("status") == "succeeded"
             and payment_before_update
-            and not payment_before_update.yookassa_payment_id
+            and payment_before_update.status != "succeeded"
         )
         # Try to capture and save payment method for future charges if available
         try:
