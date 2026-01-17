@@ -257,6 +257,13 @@ class LknpdClient:
         qty_decimal = Decimal(str(quantity))
         total = amount_decimal * qty_decimal
 
+        # API expects quantity as integer when it's a whole number
+        qty_value: int | str
+        if qty_decimal == qty_decimal.to_integral_value():
+            qty_value = int(qty_decimal)
+        else:
+            qty_value = str(qty_decimal)
+
         # Build request
         request_data = {
             "operationTime": _format_datetime(op_time),
@@ -265,7 +272,7 @@ class LknpdClient:
                 {
                     "name": name,
                     "amount": str(amount_decimal),
-                    "quantity": str(qty_decimal),
+                    "quantity": qty_value,
                 }
             ],
             "totalAmount": str(total),
