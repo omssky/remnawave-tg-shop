@@ -445,10 +445,7 @@ async def promo_edit_field_handler(callback: types.CallbackQuery, state: FSMCont
     }
 
     prompt_key = prompts.get(field, "error_occurred_try_again")
-    if field == "discount_percentage":
-        prompt_text = "Enter the new discount percentage (1-100):"
-    else:
-        prompt_text = _(prompt_key)
+    prompt_text = _(prompt_key)
 
     await state.set_state(AdminStates.waiting_for_promo_edit_details)
     await callback.message.edit_text(prompt_text)

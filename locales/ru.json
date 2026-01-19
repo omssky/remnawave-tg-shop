@@ -218,6 +218,7 @@
   "csv_no": "Нет",
   "admin_promo_edit_select_field": "Выберите поле для редактирования:",
   "admin_promo_prompt_bonus_days": "Введите новое количество бонусных дней:",
+  "admin_promo_prompt_discount_percentage": "Введите новый процент скидки (от 1 до 100):",
   "admin_promo_prompt_max_activations": "Введите новое максимальное количество активаций:",
   "admin_promo_prompt_validity_days": "Введите новый срок действия в днях (0 для бессрочного):",
   "admin_promo_edit_success": "Промокод успешно обновлен.",
@@ -314,6 +315,7 @@
   "log_payment_received": "{provider_emoji} <b>Получен платеж</b>\n\n👤 Пользователь: {user_display}\n💰 Сумма: <b>{amount} {currency}</b>\n📅 Период: <b>{months} мес.</b>\n🏦 Провайдер: {payment_provider}\n🕐 Время: {timestamp}",
   "log_payment_received_traffic": "{provider_emoji} <b>Получен платеж</b>\n\n👤 Пользователь: {user_display}\n💰 Сумма: <b>{amount} {currency}</b>\n🗂 Трафик: <b>{traffic_gb} ГБ</b>\n🏦 Провайдер: {payment_provider}\n🕐 Время: {timestamp}",
   "log_promo_activation": "🎁 <b>Активирован промокод</b>\n\n👤 Пользователь: {user_display}\n🏷 Код: <code>{promo_code}</code>\n🎯 Бонус: <b>+{bonus_days} дн.</b>\n🕐 Время: {timestamp}",
+  "log_promo_discount_activation": "💰 <b>Активирован промокод на скидку</b>\n\n👤 Пользователь: {user_display}\n🏷 Код: <code>{promo_code}</code>\n💵 Скидка: <b>{discount_percentage}%</b>\n🕐 Время: {timestamp}",
   "log_trial_activation": "🆓 <b>Активирован триал</b>\n\n👤 Пользователь: {user_display}\n⏰ Действует до: <b>{end_date}</b>\n🕐 Время: {timestamp}",
   "log_panel_sync": "{status_emoji} <b>Синхронизация с панелью</b>\n\n📊 Статус: <b>{status}</b>\n👥 Обработано пользователей: <b>{users_processed}</b>\n📋 Синхронизировано подписок: <b>{subs_synced}</b>\n🕐 Время: {timestamp}\n\n📝 Детали:\n{details}",
   "log_suspicious_promo": "⚠️ <b>Подозрительная попытка ввода промокода</b>\n\n👤 Пользователь: {user_display}\n🆔 ID: <code>{user_id}</code>\n📝 Ввод: <pre>{suspicious_input}</pre>\n🕐 Время: {timestamp}",

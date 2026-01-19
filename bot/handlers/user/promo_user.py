@@ -165,6 +165,21 @@ async def process_promo_code_input(message: types.Message, state: FSMContext,
                     f"Discount promo code '{code_input}' successfully applied for user {user.id}."
                 )
                 discount_pct = result_discount  # Returns percentage
+
+                # Send notification about discount promo activation
+                if settings.LOG_PROMO_ACTIVATIONS:
+                    try:
+                        from bot.services.notification_service import NotificationService
+                        notification_service = NotificationService(bot, settings, i18n)
+                        await notification_service.notify_discount_promo_activation(
+                            user_id=user.id,
+                            promo_code=code_input.upper(),
+                            discount_percentage=discount_pct,
+                            username=user.username
+                        )
+                    except Exception as e:
+                        logging.error(f"Failed to send discount promo activation notification: {e}")
+
                 response_to_user_text = _(
                     "discount_promo_code_applied_success",
                     code=hcode(code_input.upper()),
