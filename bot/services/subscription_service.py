@@ -82,7 +82,9 @@ class SubscriptionService:
             return None, None, None, False
 
         current_local_panel_uuid = db_user.panel_user_uuid
-        panel_username_on_panel_standard = f"tg_{user_id}"
+        panel_username_on_panel_standard = (
+            f"{self.settings.PANEL_USERNAME_PREFIX}{user_id}"
+        )
 
         panel_user_obj_from_api = None
         panel_user_created_or_linked_now = False
