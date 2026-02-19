@@ -175,6 +175,10 @@ class Settings(BaseSettings):
 
     PANEL_API_URL: Optional[str] = None
     PANEL_API_KEY: Optional[str] = None
+    PANEL_USERNAME_PREFIX: str = Field(
+        default="tg_",
+        description="Prefix for generated panel usernames (e.g. 'tg_' -> tg_<telegram_id>)",
+    )
     USER_TRAFFIC_LIMIT_GB: Optional[float] = Field(default=0.0)
     USER_TRAFFIC_STRATEGY: str = Field(default="NO_RESET")
     USER_SQUAD_UUIDS: Optional[str] = Field(

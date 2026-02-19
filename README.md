@@ -45,7 +45,7 @@
 
 1.  **Клонируйте репозиторий:**
     ```bash
-    git clone https://github.com/kavore/remnawave-tg-shop
+    git clone https://github.com/omssky/remnawave-tg-shop
     cd remnawave-tg-shop
     ```
 
@@ -130,6 +130,7 @@
     | `PANEL_API_URL` | URL API вашей панели Remnawave. |
     | `PANEL_API_KEY` | API ключ для доступа к панели. |
     | `PANEL_WEBHOOK_SECRET`| Секретный ключ для проверки вебхуков от панели. |
+    | `PANEL_USERNAME_PREFIX` | Опционально. Префикс для создаваемого username в панели (по умолчанию `tg_`, итог: `<prefix><telegram_id>`). |
     | `USER_SQUAD_UUIDS` | ID отрядов для новых пользователей. |
     | `USER_EXTERNAL_SQUAD_UUID` | Опционально. UUID внешнего отряда (External Squad) из [документации Remnawave](https://docs.rw/api), куда автоматически добавляются новые пользователи. |
     | `USER_TRAFFIC_LIMIT_GB`| Лимит трафика в ГБ (0 - безлимит). |
@@ -182,7 +183,7 @@
 ### 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/kavore/remnawave-tg-shop && cd remnawave-tg-shop
+git clone https://github.com/omssky/remnawave-tg-shop && cd remnawave-tg-shop
 ```
 
 ### 2. Настройка переменных окружения
@@ -199,6 +200,7 @@ cp .env.example .env && nano .env
 - `PANEL_API_KEY` - API ключ для доступа к панели (генерируется из UI-интерфейса панели)
 - `PANEL_WEBHOOK_SECRET` - Секретный ключ для проверки вебхуков от панели (берётся из `.env` самой панели)
 - `USER_SQUAD_UUIDS` - ID отрядов для новых пользователей
+- `PANEL_USERNAME_PREFIX` - (опционально) префикс username в панели для новых пользователей, по умолчанию `tg_`
 
 ### 3. Настройка Reverse Proxy (Nginx)
 
