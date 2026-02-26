@@ -80,7 +80,7 @@
     | `WEBHOOK_BASE_URL`| **Обязательно.** Базовый URL для вебхуков, например `https://your.domain.com`. |
     | `WEB_SERVER_HOST` | Хост для веб-сервера. | `0.0.0.0` |
     | `WEB_SERVER_PORT` | Порт для веб-сервера. | `8080` |
-    | `PAYMENT_METHODS_ORDER` | (Опционально) Порядок отображения кнопок оплаты через запятую. Поддерживаемые ключи: `severpay`, `freekassa`, `platega`, `yookassa`, `stars`, `cryptopay`. Первый будет сверху. |
+    | `PAYMENT_METHODS_ORDER` | (Опционально) Порядок отображения кнопок оплаты через запятую. Поддерживаемые ключи: `severpay`, `freekassa`, `platega`, `yookassa`, `tribute`, `stars`, `cryptopay`. Первый будет сверху. |
     | `YOOKASSA_ENABLED` | Включить/выключить YooKassa (`true`/`false`). |
     | `YOOKASSA_SHOP_ID` | ID вашего магазина в YooKassa. |
     | `YOOKASSA_SECRET_KEY`| Секретный ключ магазина YooKassa. |
@@ -98,6 +98,9 @@
     | `FREEKASSA_PAYMENT_IP` | Внешний IP вашего сервера, который будет передаваться в запрос оплаты. |
     | `FREEKASSA_PAYMENT_METHOD_ID` | ID метода оплаты через магазин FreeKassa. По умолчанию `44`. |
     | `STARS_ENABLED` | Включить/выключить Telegram Stars (`true`/`false`). |
+    | `TRIBUTE_ENABLED` | Включить/выключить Tribute (`true`/`false`). |
+    | `TRIBUTE_LINK_1_MONTH` / `TRIBUTE_LINK_3_MONTHS` / `TRIBUTE_LINK_6_MONTHS` / `TRIBUTE_LINK_12_MONTHS` | Ссылки на оплату Tribute для соответствующих периодов. |
+    | `TRIBUTE_API_KEY` | Ключ для проверки подписи webhook Tribute (`trbt-signature`). |
     | `PLATEGA_ENABLED`| Включить/выключить Platega (`true`/`false`). |
     | `PLATEGA_MERCHANT_ID`| MerchantId из личного кабинета Platega. |
     | `PLATEGA_SECRET`| API секрет для запросов Platega. |
@@ -156,7 +159,7 @@
     Эта команда скачает образ и запустит сервис в фоновом режиме.
 
 4.  **Настройка вебхуков (Обязательно):**
-    Вебхуки являются **обязательным** компонентом для работы бота, так как они используются для получения уведомлений от платежных систем (YooKassa, FreeKassa, CryptoPay, Platega, SeverPay) и панели Remnawave.
+    Вебхуки являются **обязательным** компонентом для работы бота, так как они используются для получения уведомлений от платежных систем (YooKassa, FreeKassa, CryptoPay, Tribute, Platega, SeverPay) и панели Remnawave.
 
     Вам понадобится обратный прокси (например, Nginx) для обработки HTTPS-трафика и перенаправления запросов на контейнер с ботом.
 
@@ -166,6 +169,7 @@
     -   `https://<ваш_домен>/webhook/platega` → `http://remnawave-tg-shop:<WEB_SERVER_PORT>/webhook/platega`
     -   `https://<ваш_домен>/webhook/severpay` → `http://remnawave-tg-shop:<WEB_SERVER_PORT>/webhook/severpay`
     -   `https://<ваш_домен>/webhook/cryptopay` → `http://remnawave-tg-shop:<WEB_SERVER_PORT>/webhook/cryptopay`
+    -   `https://<ваш_домен>/webhook/tribute` → `http://remnawave-tg-shop:<WEB_SERVER_PORT>/webhook/tribute`
     -   `https://<ваш_домен>/webhook/panel` → `http://remnawave-tg-shop:<WEB_SERVER_PORT>/webhook/panel`
     -   **Для Telegram:** Бот автоматически установит вебхук, если в `.env` указан `WEBHOOK_BASE_URL`. Путь будет `https://<ваш_домен>/<BOT_TOKEN>`.
 

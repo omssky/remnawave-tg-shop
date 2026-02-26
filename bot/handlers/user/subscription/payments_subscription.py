@@ -130,9 +130,17 @@ async def select_subscription_period_callback_handler(
     if discount_text:
         text_content = f"{discount_text}\n\n{text_content}"
 
+    tribute_url: Optional[str] = None
+    if not traffic_mode and getattr(settings, "TRIBUTE_ENABLED", False):
+        tribute_links = getattr(settings, "tribute_payment_links", {}) or {}
+        months_key = int(months) if float(months).is_integer() else None
+        if months_key is not None:
+            tribute_url = tribute_links.get(months_key)
+
     reply_markup = get_payment_method_keyboard(
         months,
         price_rub,
+        tribute_url,
         stars_price,
         currency_symbol_val,
         current_lang,
