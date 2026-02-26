@@ -45,6 +45,7 @@ def format_payment_text(payment: Payment, i18n: JsonI18n, lang: str, settings: S
         'pending_platega',
         'pending_severpay',
         'pending_cryptopay',
+        'pending_tribute',
     ]
     status_emoji = "✅" if payment.status == 'succeeded' else (
         "⏳" if payment.status in pending_statuses else "❌"
@@ -60,6 +61,7 @@ def format_payment_text(payment: Payment, i18n: JsonI18n, lang: str, settings: S
     
     provider_text = {
         'yookassa': 'YooKassa',
+        'tribute': 'Tribute',
         'telegram_stars': 'Telegram Stars',
         'cryptopay': 'CryptoPay',
         'freekassa': 'FreeKassa',

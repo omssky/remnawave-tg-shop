@@ -201,6 +201,7 @@ async def my_subscription_command_handler(
     traffic_mode = bool(getattr(settings, "traffic_sale_mode", False))
     config_link_display = active.get("config_link")
     connect_button_url = active.get("connect_button_url")
+    tribute_hint = ""
     config_link_value = config_link_display or get_text("config_link_not_available")
     def _fmt_gb(val: Optional[float]) -> str:
         if val is None:
@@ -250,6 +251,16 @@ async def my_subscription_command_handler(
     kb = base_markup.inline_keyboard
     try:
         local_sub = await subscription_dal.get_active_subscription_by_user_id(session, event.from_user.id)
+
+        if not traffic_mode and local_sub and local_sub.provider == "tribute":
+            tribute_links = getattr(settings, "tribute_payment_links", {}) or {}
+            tribute_link = tribute_links.get(local_sub.duration_months or 1)
+            tribute_hint = "\n\n" + (
+                get_text("subscription_tribute_notice_with_link", link=tribute_link)
+                if tribute_link
+                else get_text("subscription_tribute_notice")
+            )
+
         # Build rows to prepend above the base "back" markup
         prepend_rows = []
 
@@ -352,17 +363,27 @@ async def my_subscription_command_handler(
         except Exception:
             pass
         try:
-            await event.message.edit_text(text, reply_markup=markup, parse_mode="HTML", disable_web_page_preview=True)
+            await event.message.edit_text(
+                text + tribute_hint,
+                reply_markup=markup,
+                parse_mode="HTML",
+                disable_web_page_preview=True,
+            )
         except Exception:
             await bot.send_message(
                 chat_id=target.chat.id,
-                text=text,
+                text=text + tribute_hint,
                 reply_markup=markup,
                 parse_mode="HTML",
                 disable_web_page_preview=True,
             )
     else:
-        await target.answer(text, reply_markup=markup, parse_mode="HTML", disable_web_page_preview=True)
+        await target.answer(
+            text + tribute_hint,
+            reply_markup=markup,
+            parse_mode="HTML",
+            disable_web_page_preview=True,
+        )
 
 
 @router.callback_query(F.data == "main_action:my_devices")

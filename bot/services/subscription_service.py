@@ -651,7 +651,9 @@ class SubscriptionService:
             "status_from_panel": "ACTIVE",
             "traffic_limit_bytes": self.settings.user_traffic_limit_bytes,
             "provider": provider,
-            "skip_notifications": False,
+            "skip_notifications": (
+                provider == "tribute" and self.settings.TRIBUTE_SKIP_NOTIFICATIONS
+            ),
             "auto_renew_enabled": auto_renew_should_enable,
         }
         try:

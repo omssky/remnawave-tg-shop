@@ -234,6 +234,7 @@ class NotificationService:
             "freekassa": "💳",
             "cryptopay": "₿",
             "stars": "⭐",
+            "tribute": "💎",
             "platega": "💳",
             "severpay": "💳",
         }.get(payment_provider.lower(), "💰")
